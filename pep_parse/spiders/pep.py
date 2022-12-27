@@ -18,7 +18,8 @@ class PepSpider(scrapy.Spider):
             yield response.follow(pep, callback=self.parse_pep)
 
     def parse_pep(
-            self, response: HtmlResponse) -> Generator[PepParseItem, None, None]:
+            self, response: HtmlResponse) -> Generator[PepParseItem,
+                                                       None, None]:
         pep_data = response.css('h1.page-title::text').get()
         status_data = response.css('dt:contains("Status") + dd')
         data = {
