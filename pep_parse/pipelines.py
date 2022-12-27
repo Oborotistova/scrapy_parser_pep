@@ -6,7 +6,7 @@ from scrapy import Item, Spider
 
 path = Path(__file__)
 
-BASE_DIR = path.parent.parent
+BASE_DIR = path.parent
 BASE_DIR_NAME = 'results'
 TIME_FORMAT = dt.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
 
@@ -16,7 +16,7 @@ class PepParsePipeline:
     total = 0
 
     def open_spider(self, spider: Spider) -> None:
-        result_dir = BASE_DIR / BASE_DIR_NAME
+        result_dir = BASE_DIR.parent / BASE_DIR_NAME
         result_dir.mkdir(exist_ok=True)
 
     def process_item(self, item: Item, spider: Spider) -> Item:
