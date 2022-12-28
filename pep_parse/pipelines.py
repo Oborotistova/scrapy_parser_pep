@@ -2,8 +2,8 @@ import csv
 import datetime as dt
 
 from scrapy import Item, Spider
-from settings import (BASE_DIR, BASE_DIR_NAME,
-                      TIME_FORMAT, CSV_TITLE, ENCODING, FILE_FORMAT)
+from settings import (BASE_DIR, BASE_DIR_NAME, CSV_TITLE, ENCODING,
+                      FILE_FORMAT, TIME_FORMAT)
 
 
 class PepParsePipeline:
