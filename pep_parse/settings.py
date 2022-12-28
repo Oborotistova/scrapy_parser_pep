@@ -1,3 +1,5 @@
+from pathlib import Path
+
 BOT_NAME = 'pep_parse'
 
 SPIDER_MODULES = ['pep_parse.spiders']
@@ -18,3 +20,10 @@ FEEDS = {
 ITEM_PIPELINES = {
     'pep_parse.pipelines.PepParsePipeline': 300,
 }
+
+BASE_DIR = Path(__file__).parent
+BASE_DIR_NAME = 'results'
+TIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
+CSV_TITLE = ('Статус', 'Количество')
+ENCODING = 'utf-8'
+FILE_FORMAT = 'csv'

@@ -1,14 +1,9 @@
 import csv
 import datetime as dt
-from pathlib import Path
 
 from scrapy import Item, Spider
-
-path = Path(__file__)
-
-BASE_DIR = path.parent
-BASE_DIR_NAME = 'results'
-TIME_FORMAT = dt.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')
+from settings import (BASE_DIR, BASE_DIR_NAME,
+                      TIME_FORMAT, CSV_TITLE, ENCODING, FILE_FORMAT)
 
 
 class PepParsePipeline:
@@ -28,14 +23,14 @@ class PepParsePipeline:
         return item
 
     def close_spider(self, spider: Spider) -> None:
-        results = [('Статус', 'Количество')]
+        results = [CSV_TITLE]
         for k, v in self.status_count.items():
             results.append((k, v))
         results.append(('Total ', self.total))
-
-        filename = f'status_summary_{TIME_FORMAT}.csv'
+        fileformat = dt.datetime.now().strftime(TIME_FORMAT)
+        filename = f'status_summary_{fileformat}.{FILE_FORMAT}'
         filepath = BASE_DIR / BASE_DIR_NAME / filename
 
-        with open(filepath, 'w', encoding='utf-8') as f:
+        with open(filepath, 'w', encoding=ENCODING) as f:
             writer = csv.writer(f)
             writer.writerows(results)
